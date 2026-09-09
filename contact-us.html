@@ -1,0 +1,59 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Contact Us — CarFix TNC</title>
+    <link rel="icon" href="/images/logo.svg" type="image/svg+xml" />
+    <link rel="stylesheet" href="/src/css/main.css" />
+  </head>
+  <body>
+    <div data-header></div>
+    <main>
+      <section class="page-hero">
+        <div class="container">
+          <h1>Get in Touch</h1>
+          <p>Request a quote, ask a question, or schedule a service appointment.</p>
+        </div>
+      </section>
+
+      <section class="section tight">
+        <div class="container contact-grid">
+          <div class="contact-card">
+            <h2 style="font-size:1.8rem;margin-bottom:18px">Our Location and Directions</h2>
+            <p><strong>Address</strong><br />123 Workshop Lane, Your City, ST 00000</p>
+            <p style="margin-top:14px"><strong>Phone</strong><br />(555) 010-2020</p>
+            <p style="margin-top:14px"><strong>Hours</strong><br />Mon–Fri 8:00–6:00<br />Sat 9:00–2:00<br />Sun Closed</p>
+            <a class="btn btn-primary" href="mailto:hello@yourdomain.com" style="margin-top:22px">Email Us</a>
+          </div>
+          <div class="form-card">
+            <form class="form-grid" onsubmit="event.preventDefault(); alert('Thank you! Your submission has been received!'); this.reset();">
+              <label>Name <input name="name" required /></label>
+              <label>Email <input type="email" name="email" required /></label>
+              <label>Phone <input type="tel" name="phone" /></label>
+              <label>Service
+                <select name="service">
+                  <option>General inquiry</option>
+                  <option>Air Conditioning</option>
+                  <option>Engine Diagnostics</option>
+                  <option>Battery</option>
+                  <option>Tires / Alignment</option>
+                  <option>Cooling System</option>
+                </select>
+              </label>
+              <label>Message <textarea name="message" required></textarea></label>
+              <button class="btn btn-primary" type="submit">Send Message</button>
+            </form>
+          </div>
+        </div>
+        <div class="container">
+          <div class="map-placeholder" aria-label="Map placeholder" style="background-image:url('/images/map.jpg');background-size:cover;background-position:center">
+            <span>Swap this block for an embedded map</span>
+          </div>
+        </div>
+      </section>
+    </main>
+    <div data-footer></div>
+    <script type="module" src="/src/js/main.js"></script>
+  </body>
+</html>

@@ -1,0 +1,44 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Checkout — CarFix TNC</title>
+    <link rel="icon" href="/images/logo.svg" type="image/svg+xml" />
+    <link rel="stylesheet" href="/src/css/main.css" />
+  </head>
+  <body>
+    <div data-header></div>
+    <main>
+      <section class="page-hero">
+        <div class="container">
+          <h1>Checkout</h1>
+          <p>Layout ready for a payment provider. No live charges are processed yet.</p>
+        </div>
+      </section>
+      <section class="section tight">
+        <div class="container checkout-wrap">
+          <form class="panel form-grid" onsubmit="event.preventDefault(); alert('Connect a payment provider to complete checkout.');">
+            <h2 style="font-size:1.4rem">Shipping &amp; Contact</h2>
+            <label>Full name <input required /></label>
+            <label>Email <input type="email" required /></label>
+            <label>Address <input required /></label>
+            <label>City <input required /></label>
+            <label>Postal code <input required /></label>
+            <button class="btn btn-primary" type="submit">Place Order</button>
+          </form>
+          <aside class="panel">
+            <h2 style="font-size:1.4rem;margin-bottom:16px">Order Summary</h2>
+            <p style="color:var(--muted)">Your cart is empty.</p>
+            <div style="display:flex;justify-content:space-between;margin-top:24px;font-weight:700">
+              <span>Total</span><span>$0.00</span>
+            </div>
+            <a class="btn btn-outline" href="/products.html" style="margin-top:18px;width:100%">Continue Shopping</a>
+          </aside>
+        </div>
+      </section>
+    </main>
+    <div data-footer></div>
+    <script type="module" src="/src/js/main.js"></script>
+  </body>
+</html>
