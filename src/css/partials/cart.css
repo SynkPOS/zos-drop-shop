@@ -1,0 +1,52 @@
+/* === Cart drawer === */
+/* CART DRAWER */
+.cart-drawer {
+  position: fixed;
+  inset: 0;
+  z-index: 80;
+  pointer-events: none;
+}
+
+.cart-drawer.open {
+  pointer-events: auto;
+}
+
+.cart-backdrop {
+  position: absolute;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.45);
+  opacity: 0;
+  transition: opacity 0.2s ease;
+}
+
+.cart-panel {
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: min(420px, 100%);
+  height: 100%;
+  background: var(--white);
+  transform: translateX(100%);
+  transition: transform 0.25s ease;
+  padding: 28px;
+  display: flex;
+  flex-direction: column;
+}
+
+.cart-drawer.open .cart-backdrop {
+  opacity: 1;
+}
+
+.cart-drawer.open .cart-panel {
+  transform: translateX(0);
+}
+
+.cart-panel h2 {
+  font-size: 1.6rem;
+  margin-bottom: 18px;
+}
+
+.cart-empty {
+  color: var(--muted);
+  flex: 1;
+}

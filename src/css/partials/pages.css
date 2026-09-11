@@ -1,0 +1,239 @@
+/* === Inner pages (about/services/products/faq/contact) === */
+/* PAGE HERO (inner) */
+.page-hero {
+  padding: 72px 0 40px;
+}
+
+.page-hero h1 {
+  font-size: clamp(2.4rem, 5vw, 64px);
+  text-transform: uppercase;
+  max-width: 16ch;
+  font-weight: 800;
+  line-height: 1.15;
+}
+
+.page-hero p {
+  margin-top: 16px;
+  color: var(--muted);
+  max-width: 40rem;
+  font-size: 1.1rem;
+}
+
+/* SERVICES LIST PAGE */
+.service-rows {
+  display: flex;
+  flex-direction: column;
+  gap: 28px;
+}
+
+.service-row {
+  display: grid;
+  grid-template-columns: 1.1fr 1fr;
+  gap: 28px;
+  align-items: center;
+  background: var(--white);
+  border-radius: var(--radius-xl);
+  overflow: hidden;
+  border: 1px solid var(--line);
+}
+
+.service-row:nth-child(even) .service-row-media {
+  order: 2;
+}
+
+.service-row-media {
+  min-height: 320px;
+  background: #ccc center/cover no-repeat;
+}
+
+.service-row-body {
+  padding: 36px;
+}
+
+.service-row-body h2 {
+  font-size: 1.8rem;
+  margin-bottom: 12px;
+}
+
+.service-row-body p {
+  color: var(--muted);
+  margin-bottom: 20px;
+}
+
+/* PRODUCTS */
+.product-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 20px;
+}
+
+.product-card {
+  background: var(--white);
+  border: 1px solid var(--line);
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+}
+
+.product-media {
+  aspect-ratio: 1;
+  background: #e8e8de center/cover no-repeat;
+}
+
+.product-body {
+  padding: 20px;
+}
+
+.product-body h3 {
+  font-size: 1.15rem;
+  margin-bottom: 8px;
+}
+
+.price {
+  font-weight: 700;
+  color: var(--primary);
+}
+
+/* FAQ */
+.faq-list details {
+  background: var(--white);
+  border: 1.5px solid var(--black);
+  border-radius: var(--radius-md);
+  padding: 18px 22px;
+  margin-bottom: 14px;
+}
+
+.faq-list summary {
+  list-style: none;
+  cursor: pointer;
+  font-family: var(--heading);
+  font-weight: 700;
+  font-size: 1.1rem;
+  display: flex;
+  justify-content: space-between;
+  gap: 16px;
+}
+
+.faq-list summary::-webkit-details-marker {
+  display: none;
+}
+
+.faq-list details p {
+  margin-top: 12px;
+  color: var(--muted);
+}
+
+/* CONTACT */
+.contact-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 28px;
+}
+
+.contact-card,
+.form-card {
+  background: var(--white);
+  border: 1.5px solid var(--black);
+  border-radius: var(--radius-lg);
+  padding: 32px;
+}
+
+.form-grid {
+  display: grid;
+  gap: 14px;
+}
+
+.form-grid label {
+  display: grid;
+  gap: 6px;
+  font-weight: 600;
+  font-size: 0.92rem;
+}
+
+.form-grid input,
+.form-grid textarea,
+.form-grid select {
+  width: 100%;
+  border: 1.5px solid var(--black);
+  border-radius: 14px;
+  padding: 14px 16px;
+  background: var(--bg-soft);
+}
+
+.form-grid textarea {
+  min-height: 140px;
+  resize: vertical;
+}
+
+.map-placeholder {
+  margin-top: 40px;
+  border-radius: var(--radius-xl);
+  min-height: 360px;
+  background: #ddd url('/images/placeholder.svg') center/cover no-repeat;
+  border: 1px solid var(--line);
+  display: grid;
+  place-items: end stretch;
+}
+
+.map-placeholder span {
+  background: rgba(0, 0, 0, 0.7);
+  color: #fff;
+  padding: 12px 18px;
+  font-size: 0.9rem;
+}
+
+/* ABOUT */
+.about-lead {
+  font-size: clamp(1.5rem, 2.8vw, 2.4rem);
+  max-width: 52rem;
+  margin-bottom: 40px;
+}
+
+.video-block {
+  border-radius: var(--radius-xl);
+  overflow: hidden;
+  background: #111;
+  min-height: 420px;
+  position: relative;
+  border: 1px solid #222;
+}
+
+.video-block video,
+.video-block img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  min-height: 420px;
+}
+
+.video-block .swap-hint {
+  position: absolute;
+  left: 20px;
+  bottom: 20px;
+  background: rgba(0, 0, 0, 0.65);
+  color: #fff;
+  padding: 10px 14px;
+  border-radius: var(--radius-pill);
+  font-size: 0.85rem;
+}
+
+.tech-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 20px;
+}
+
+.tech-card {
+  background: var(--white);
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  border: 1px solid var(--line);
+}
+
+.tech-media {
+  aspect-ratio: 4 / 5;
+  background: #ccc center/cover no-repeat;
+}
+
+.tech-body {
+  padding: 18px;
+}

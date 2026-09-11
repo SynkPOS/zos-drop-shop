@@ -1,0 +1,290 @@
+/* === Motion / reveals / hero entrance === */
+/* ========== Motion system (Webflow-like entrance / scroll) ========== */
+.js-ready [data-reveal],
+.js-ready [data-reveal-stagger] > * {
+  opacity: 0;
+  transform: translate3d(0, 42px, 0) scale(0.96);
+  transition:
+    opacity 0.7s cubic-bezier(0.22, 1, 0.36, 1),
+    transform 0.7s cubic-bezier(0.22, 1, 0.36, 1);
+  transition-delay: var(--delay, 0ms);
+}
+
+.js-ready [data-reveal].is-visible,
+.js-ready [data-reveal-stagger] > *.is-visible {
+  opacity: 1;
+  transform: translate3d(0, 0, 0) scale(1);
+}
+
+.js-ready [data-reveal='left'] {
+  transform: translate3d(-48px, 0, 0);
+}
+
+.js-ready [data-reveal='left'].is-visible {
+  transform: translate3d(0, 0, 0);
+}
+
+.js-ready [data-reveal='right'] {
+  transform: translate3d(48px, 0, 0);
+}
+
+.js-ready [data-reveal='right'].is-visible {
+  transform: translate3d(0, 0, 0);
+}
+
+.js-ready [data-reveal='scale'] {
+  transform: scale(0.85);
+}
+
+.js-ready [data-reveal='scale'].is-visible {
+  transform: scale(1);
+}
+
+/* Hero load choreography — keyframes (transitions race first paint / refresh) */
+body.hero-resetting .hero,
+body.hero-resetting .hero-title,
+body.hero-resetting .hero-lead,
+body.hero-resetting .hero-cta-wrap .btn,
+body.hero-resetting .hero-bg-image,
+body.hero-resetting .hero-social-line,
+body.hero-resetting .hero-social-links a,
+body.hero-resetting .hero-video-wrapper,
+body.hero-resetting .columns-background,
+body.hero-resetting .animation-columns-wrapper {
+  animation: none !important;
+  transition: none !important;
+}
+
+/* Live IX2 a-58 “Hero Section Animation”: .hero-section y -100% → 0 over 1s */
+@keyframes hero-drop-in {
+  from { transform: translate3d(0, -100%, 0); }
+  to { transform: translate3d(0, 0%, 0); }
+}
+
+@keyframes hero-wipe-in {
+  from { transform: translate3d(-110%, 0, 0); }
+  to { transform: translate3d(0, 0, 0); }
+}
+
+@keyframes hero-bg-zoom {
+  from { transform: scale3d(1.7, 1.7, 1); }
+  to { transform: scale3d(1, 1, 1); }
+}
+
+@keyframes hero-line-grow {
+  from { height: 0; }
+  to { height: 66px; }
+}
+
+@keyframes hero-fade-up {
+  from { opacity: 0; transform: translate3d(0, 16px, 0); }
+  to { opacity: 1; transform: translate3d(0, 0, 0); }
+}
+
+@keyframes hero-video-in {
+  from { opacity: 0; transform: translate3d(48px, 0, 0); }
+  to { opacity: 1; transform: translate3d(0, 0, 0); }
+}
+
+@keyframes hero-col-close {
+  from { width: 100%; }
+  to { width: 0%; }
+}
+
+/* Pre-state before body.hero-in (first paint via html.js-ready) */
+.js-ready:not(.reduced-motion) body:not(.hero-in) .hero {
+  transform: translate3d(0, -100%, 0);
+  transform-style: preserve-3d;
+}
+
+.js-ready:not(.reduced-motion) body:not(.hero-in) .hero-title,
+.js-ready:not(.reduced-motion) body:not(.hero-in) .hero-lead,
+.js-ready:not(.reduced-motion) body:not(.hero-in) .hero-cta-wrap .btn {
+  transform: translate3d(-110%, 0, 0);
+}
+
+.js-ready:not(.reduced-motion) body:not(.hero-in) .hero-bg-image {
+  transform: scale3d(1.7, 1.7, 1);
+  transform-origin: center bottom;
+}
+
+.js-ready:not(.reduced-motion) body:not(.hero-in) .hero-social-line {
+  height: 0;
+}
+
+.js-ready:not(.reduced-motion) body:not(.hero-in) .hero-social-links a {
+  opacity: 0;
+  transform: translate3d(0, 16px, 0);
+}
+
+.js-ready:not(.reduced-motion) body:not(.hero-in) .hero-video-wrapper {
+  opacity: 0;
+  transform: translate3d(48px, 0, 0);
+}
+
+.js-ready:not(.reduced-motion) body:not(.hero-done) .animation-columns-wrapper {
+  display: flex;
+}
+
+.js-ready:not(.reduced-motion) body:not(.hero-in) .columns-background {
+  width: 100%;
+  height: 100%;
+}
+
+/* Play */
+.js-ready body.hero-in .hero {
+  transform-style: preserve-3d;
+  animation: hero-drop-in 1s ease both;
+}
+
+.js-ready body.hero-in .hero-title {
+  animation: hero-wipe-in 1s cubic-bezier(0.22, 1, 0.36, 1) 0.15s both;
+}
+
+.js-ready body.hero-in .hero-lead {
+  animation: hero-wipe-in 1s cubic-bezier(0.22, 1, 0.36, 1) 0.32s both;
+}
+
+.js-ready body.hero-in .hero-cta-wrap .btn {
+  animation: hero-wipe-in 1s cubic-bezier(0.22, 1, 0.36, 1) 0.5s both;
+}
+
+.js-ready body.hero-in .hero-bg-image {
+  transform-origin: center bottom;
+  animation: hero-bg-zoom 1.6s cubic-bezier(0.22, 1, 0.36, 1) 0.05s both;
+}
+
+.js-ready body.hero-in .hero-social-line {
+  animation: hero-line-grow 0.9s cubic-bezier(0.22, 1, 0.36, 1) 0.55s both;
+}
+
+.js-ready body.hero-in .hero-social-links a {
+  animation: hero-fade-up 0.55s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+.js-ready body.hero-in .hero-social-links a:nth-child(1) { animation-delay: 0.6s; }
+.js-ready body.hero-in .hero-social-links a:nth-child(2) { animation-delay: 0.68s; }
+.js-ready body.hero-in .hero-social-links a:nth-child(3) { animation-delay: 0.76s; }
+.js-ready body.hero-in .hero-social-links a:nth-child(4) { animation-delay: 0.84s; }
+
+.js-ready body.hero-in .hero-video-wrapper {
+  animation: hero-video-in 0.8s cubic-bezier(0.22, 1, 0.36, 1) 0.2s both;
+}
+
+.js-ready body.hero-in .columns-background {
+  animation: hero-col-close 1.05s cubic-bezier(0.65, 0.05, 0.36, 1) both;
+}
+
+.js-ready body.hero-in .columns-wrapper:nth-child(1) .columns-background { animation-delay: 0.25s; }
+.js-ready body.hero-in .columns-wrapper:nth-child(2) .columns-background { animation-delay: 0.38s; }
+.js-ready body.hero-in .columns-wrapper:nth-child(3) .columns-background { animation-delay: 0.51s; }
+.js-ready body.hero-in .columns-wrapper:nth-child(4) .columns-background { animation-delay: 0.64s; }
+
+.js-ready body.hero-done .animation-columns-wrapper {
+  display: none;
+}
+
+html.reduced-motion .hero,
+html.reduced-motion .hero-title,
+html.reduced-motion .hero-lead,
+html.reduced-motion .hero-cta-wrap .btn,
+html.reduced-motion .hero-bg-image,
+html.reduced-motion .hero-social-links a,
+html.reduced-motion .hero-video-wrapper,
+html.reduced-motion .columns-background {
+  opacity: 1 !important;
+  transform: none !important;
+  animation: none !important;
+}
+
+html.reduced-motion .hero-social-line {
+  height: 66px !important;
+}
+
+html.reduced-motion .animation-columns-wrapper {
+  display: none !important;
+}
+
+.services-card,
+.product-card,
+.service-row {
+  transition:
+    transform 0.3s cubic-bezier(0.22, 1, 0.36, 1),
+    box-shadow 0.3s ease;
+}
+
+.testimonial-card:hover,
+.product-card:hover {
+  transform: translateY(-6px);
+  box-shadow: var(--shadow-soft);
+}
+
+.product-media,
+.tech-media,
+.service-row-media {
+  transition: transform 0.5s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.product-card:hover .product-media,
+.tech-card:hover .tech-media {
+  transform: scale(1.05);
+}
+
+.site-header {
+  transition: box-shadow 0.25s ease, background 0.25s ease;
+}
+
+@media (max-width: 991px) {
+  .mobile-nav {
+    display: block;
+    max-height: 0;
+    overflow: hidden;
+    opacity: 0;
+    padding-top: 0;
+    padding-bottom: 0;
+    border-top-color: transparent;
+    transition: max-height 0.35s ease, opacity 0.25s ease, padding 0.25s ease, border-color 0.25s ease;
+  }
+
+  .mobile-nav.open {
+    max-height: 520px;
+    opacity: 1;
+    padding: 8px 20px 24px;
+    border-top-color: #e6e6e6;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+
+  .js-ready [data-reveal],
+  .js-ready [data-reveal-stagger] > *,
+  .js-ready .hero,
+  .js-ready .hero-title,
+  .js-ready .hero-lead,
+  .js-ready .hero-cta-wrap .btn,
+  .js-ready .hero-bg-image,
+  .js-ready .hero-social-links a,
+  .js-ready .hero-video-wrapper,
+  .js-ready .columns-background {
+    opacity: 1 !important;
+    transform: none !important;
+    animation: none !important;
+  }
+
+  .js-ready .hero-social-line {
+    height: 66px !important;
+    animation: none !important;
+  }
+
+  .js-ready .animation-columns-wrapper {
+    display: none !important;
+  }
+}

@@ -1,0 +1,298 @@
+/* === Home hero === */
+/* HERO — matched to live CarFix template measurements @ 1440px */
+.hero {
+  position: relative;
+  display: block;
+  padding: 0;
+  /* Same footprint as live .hero-section so absolute social bottom/left resolve correctly */
+  min-height: 864px;
+}
+
+.hero-shell {
+  position: relative;
+  width: min(100% - 40px, 1760px);
+  margin: 0 auto;
+  height: 864px;
+  background: #000;
+  border-radius: 60px;
+  overflow: clip;
+  color: #fff;
+}
+
+.hero-bg-image {
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 137px;
+  width: 100%;
+  height: calc(100% - 137px);
+  object-fit: cover;
+  object-position: center center;
+  opacity: 0.46;
+  z-index: 0;
+  pointer-events: none;
+}
+
+.hero-contents-row {
+  position: relative;
+  z-index: 2;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 40px;
+  height: 100%;
+  padding: 100px 80px;
+  box-sizing: border-box;
+}
+
+.hero-copy {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  width: min(100%, 585px);
+  max-width: 780px;
+}
+
+.hero-mask {
+  position: relative;
+  overflow: hidden;
+}
+
+.hero-title {
+  margin: 0;
+  font-family: var(--heading);
+  font-size: 80px;
+  font-weight: 800;
+  line-height: 96px;
+  letter-spacing: normal;
+  text-transform: uppercase;
+  color: #fff;
+}
+
+.hero-lead-mask {
+  margin-top: 20px;
+  max-width: 750px;
+}
+
+.hero-lead {
+  margin: 0;
+  font-family: var(--heading);
+  font-size: 18px;
+  font-weight: 400;
+  line-height: 28px;
+  color: rgba(255, 255, 255, 0.9);
+}
+
+.hero-cta-wrap {
+  margin-top: 63px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  overflow: hidden;
+}
+
+.hero-cta-wrap .btn,
+.hero-cta-wrap .btn-primary {
+  background: #f4f4ec;
+  color: #010101;
+}
+
+.hero-cta-wrap .btn:hover,
+.hero-cta-wrap .btn-primary:hover {
+  background: #f4f4ec;
+  color: #010101;
+}
+
+.hero-video-wrapper {
+  position: relative;
+  z-index: 1;
+  width: 600px;
+  max-width: 600px;
+  height: 664px;
+  flex-shrink: 0;
+  background: #000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+}
+
+/* Live .animation-columns-wrapper — 4 black blinds that collapse open */
+.animation-columns-wrapper {
+  position: absolute;
+  inset: 0;
+  z-index: 110;
+  display: none;
+  flex-flow: row;
+  gap: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+}
+
+.columns-wrapper {
+  position: relative;
+  flex: 1 1 0;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+}
+
+.columns-background {
+  width: 100%;
+  height: 100%;
+  background: #000;
+}
+
+.hero-video {
+  position: relative;
+  flex-shrink: 0;
+  width: 609px;
+  height: 669px;
+  overflow: clip;
+  background-color: #000;
+}
+
+.hero-video video {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+  display: block;
+  background: #111 url('/images/hero-poster.jpg') center/cover no-repeat;
+}
+
+/* Live: Subtract SVG is a black cover with transparent arch windows over the video */
+.hero-video-arch {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  z-index: 1;
+  width: 618px;
+  height: 684px;
+  max-width: none;
+  transform: translate(-50%, -50%);
+  pointer-events: none;
+  user-select: none;
+}
+
+/* Live: sibling of shell inside .hero-section — inset: auto auto 245px 20px */
+.hero-social {
+  position: absolute;
+  left: 20px;
+  bottom: 245px;
+  top: auto;
+  z-index: 4;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 20px;
+  width: 30px;
+  height: 346px;
+  pointer-events: auto;
+}
+
+.hero-social-line {
+  width: 1px;
+  height: 66px;
+  flex-shrink: 0;
+  background: #000;
+}
+
+.hero-social-links {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 18px;
+}
+
+.hero-social-links a {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  text-decoration: none;
+  transition: background-color 0.5s ease;
+}
+
+.hero-social-links a:hover {
+  background-color: #000;
+}
+
+.hero-social-links a img {
+  display: block;
+  width: 16px;
+  height: auto;
+  max-width: 16px;
+  object-fit: contain;
+}
+
+@media (max-width: 1200px) {
+  .hero-shell {
+    height: auto;
+    min-height: 720px;
+  }
+
+  .hero-contents-row {
+    padding: 80px 48px;
+    gap: 28px;
+  }
+
+  .hero-title {
+    font-size: clamp(42px, 6vw, 64px);
+    line-height: 1.15;
+  }
+
+  .hero-video-wrapper {
+    width: min(100%, 480px);
+    height: 520px;
+  }
+}
+
+@media (max-width: 991px) {
+  .hero-shell {
+    width: min(100% - 24px, 1760px);
+    border-radius: 40px;
+    min-height: 0;
+    height: auto;
+  }
+
+  .hero-contents-row {
+    flex-direction: column;
+    align-items: stretch;
+    padding: 64px 28px 40px;
+  }
+
+  .hero-copy {
+    width: 100%;
+    max-width: none;
+  }
+
+  .hero-title {
+    font-size: 42px;
+    line-height: 1.15;
+  }
+
+  .hero-cta-wrap {
+    margin-top: 36px;
+  }
+
+  .hero-video-wrapper {
+    width: 100%;
+    max-width: none;
+    height: 420px;
+  }
+
+  .hero-social {
+    display: none;
+  }
+
+  .hero-bg-image {
+    top: 80px;
+    height: calc(100% - 80px);
+  }
+}

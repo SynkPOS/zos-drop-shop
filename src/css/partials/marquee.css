@@ -1,0 +1,161 @@
+/* === Logo marquee === */
+/* LOGO MARQUEE — live .section.no-padding / .logotexts-wrapper */
+.section.no-padding {
+  padding-top: 0;
+  padding-bottom: 0;
+}
+
+.logo-marquee-section {
+  padding: 0;
+}
+
+.container.logo-marquee-container {
+  width: 100%;
+  max-width: 1680px;
+  padding-left: 40px;
+  padding-right: 40px;
+  margin-inline: auto;
+}
+
+.logotexts-wrapper {
+  display: flex;
+  flex-flow: column;
+  justify-content: space-between;
+  align-items: center;
+  gap: 75px;
+  width: 100%;
+  overflow: hidden;
+}
+
+.logo-marquee-section .line-full {
+  background-color: #545454;
+  width: 100%;
+  height: 1px;
+  transform-origin: left center;
+}
+
+.js-ready .logo-marquee-section .line-full {
+  width: 0;
+  transition: width 1.1s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.js-ready .logo-marquee-section .line-full.is-visible {
+  width: 100%;
+}
+
+.logo-merge {
+  position: relative;
+  display: flex;
+  flex-flow: row;
+  justify-content: space-between;
+  align-items: center;
+  gap: 0;
+  width: 100%;
+  overflow: clip;
+}
+
+.js-ready .logo-merge {
+  opacity: 0;
+  transform: translate3d(0, 50px, 0) scale(0.9);
+  transition:
+    opacity 0.9s cubic-bezier(0.22, 1, 0.36, 1),
+    transform 0.9s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.js-ready .logo-merge.is-visible {
+  opacity: 1;
+  transform: translate3d(0, 0, 0) scale(1);
+}
+
+.absolute-linear-gradient {
+  z-index: 2;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  max-width: 10%;
+  height: 100%;
+  background-image: linear-gradient(90deg, var(--bg), #fff0 73%);
+  pointer-events: none;
+}
+
+.absolute-linear-gradient.right {
+  left: auto;
+  right: 0;
+  inset: 0 0 0 auto;
+  background-image: linear-gradient(270deg, var(--bg), #fff0 73%);
+}
+
+.logo-wrapper-loop {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  gap: 39px;
+  width: max-content;
+  margin-bottom: 0;
+  will-change: transform;
+}
+
+.js-ready .logo-wrapper-loop.is-running {
+  animation: logo-marquee 35s linear infinite;
+}
+
+.logo-image {
+  display: block;
+  flex: 0 0 auto;
+  height: 144px;
+  width: auto;
+  max-width: none;
+}
+
+@keyframes logo-marquee {
+  from {
+    transform: translate3d(0, 0, 0);
+  }
+  to {
+    transform: translate3d(-50%, 0, 0);
+  }
+}
+
+@media (max-width: 991px) {
+  .container.logo-marquee-container {
+    padding-left: 20px;
+    padding-right: 20px;
+  }
+
+  .logotexts-wrapper {
+    gap: 48px;
+  }
+
+  .logo-image {
+    height: 96px;
+  }
+}
+
+@media (max-width: 479px) {
+  .logotexts-wrapper {
+    gap: 36px;
+  }
+
+  .logo-image {
+    height: 72px;
+  }
+
+  .logo-wrapper-loop {
+    gap: 28px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .js-ready .logo-wrapper-loop.is-running {
+    animation: none;
+  }
+
+  .js-ready .logo-merge,
+  .js-ready .logo-marquee-section .line-full {
+    opacity: 1;
+    width: 100%;
+    transform: none;
+    transition: none;
+  }
+}

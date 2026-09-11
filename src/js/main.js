@@ -106,6 +106,9 @@ function initServicesPin() {
 
   const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches
   const mobile = () => window.matchMedia('(max-width: 991px)').matches
+  const reveals = [...section.querySelectorAll('[data-services-reveal]')]
+  const prev = section.querySelector('[data-services-prev]')
+  const next = section.querySelector('[data-services-next]')
   let ticking = false
 
   const update = () => {
@@ -114,13 +117,15 @@ function initServicesPin() {
       frame.style.transform = ''
       return
     }
+    // Progress 0→1 while the pin section scrolls through the viewport.
+    // At 0: cards 1–3. At 1: last card aligned to the left of the window.
     const rect = section.getBoundingClientRect()
-    const scrollable = section.offsetHeight - window.innerHeight
-    const scrolled = Math.min(Math.max(0, -rect.top), Math.max(0, scrollable))
-    const progress = scrollable > 0 ? scrolled / scrollable : 0
-    const maxX = Math.max(0, frame.scrollWidth - window.innerWidth)
-    const maxVw = (maxX / window.innerWidth) * 100
-    frame.style.transform = `translate3d(${-progress * maxVw}vw, 0, 0)`
+    const height = section.offsetHeight || 1
+    const progress = Math.min(1, Math.max(0, -rect.top / height))
+    const items = frame.querySelectorAll('.services-item')
+    const last = items[items.length - 1]
+    const maxX = last ? Math.max(0, last.offsetLeft) : 0
+    frame.style.transform = `translate3d(${-progress * maxX}px, 0, 0)`
   }
 
   const onScroll = () => {
@@ -133,22 +138,55 @@ function initServicesPin() {
   window.addEventListener('scroll', onScroll, { passive: true })
   window.addEventListener('resize', update)
 
+  if (reduce) {
+    reveals.forEach((el) => el.classList.add('is-visible'))
+  } else {
+    const revealVisible = () => {
+      reveals.forEach((el) => {
+        if (el.classList.contains('is-visible')) return
+        const r = el.getBoundingClientRect()
+        const inView = r.bottom > 80 && r.top < window.innerHeight - 40 && r.right > 40 && r.left < window.innerWidth - 40
+        if (inView) el.classList.add('is-visible')
+      })
+    }
+    revealVisible()
+    window.addEventListener('scroll', revealVisible, { passive: true })
+    window.addEventListener('resize', revealVisible)
+  }
+
+  const step = () => {
+    const item = section.querySelector('.services-item')
+    return item ? item.getBoundingClientRect().width + 2 : Math.min(frame.clientWidth * 0.8, 400)
+  }
+  prev?.addEventListener('click', () => {
+    frame.scrollBy({ left: -step(), behavior: 'smooth' })
+  })
+  next?.addEventListener('click', () => {
+    frame.scrollBy({ left: step(), behavior: 'smooth' })
+  })
+
   if (reduce || mobile()) return
 
+  // Live IX2 a-27: mouse icon tracks pointer inside .item as -300%…300% of icon size
   frame.querySelectorAll('.services-card').forEach((card) => {
     const mouse = card.querySelector('.services-mouse')
     if (!mouse) return
+    const item = card.closest('.services-item') || card
 
-    card.addEventListener('pointerenter', () => card.classList.add('is-cursor'))
-    card.addEventListener('pointerleave', () => {
+    item.addEventListener('pointerenter', () => card.classList.add('is-cursor'))
+    item.addEventListener('pointerleave', () => {
       card.classList.remove('is-cursor')
+      card.style.setProperty('--mx', '0%')
+      card.style.setProperty('--my', '0%')
     })
-    card.addEventListener('pointermove', (event) => {
-      const rect = card.getBoundingClientRect()
-      const x = event.clientX - rect.left - mouse.offsetWidth / 2
-      const y = event.clientY - rect.top - mouse.offsetHeight / 2
-      card.style.setProperty('--mx', `${x}px`)
-      card.style.setProperty('--my', `${y}px`)
+    item.addEventListener('pointermove', (event) => {
+      const rect = item.getBoundingClientRect()
+      const px = rect.width ? (event.clientX - rect.left) / rect.width : 0.5
+      const py = rect.height ? (event.clientY - rect.top) / rect.height : 0.5
+      const mx = -300 + px * 600
+      const my = -300 + py * 600
+      card.style.setProperty('--mx', `${mx}%`)
+      card.style.setProperty('--my', `${my}%`)
     })
   })
 }
@@ -399,14 +437,58 @@ function initFooter() {
   els.forEach((el) => io.observe(el))
 }
 
+function playHeroEntrance() {
+  const hero = document.querySelector('.hero')
+  if (!hero) return
+
+  const reduce =
+    document.documentElement.classList.contains('reduced-motion') ||
+    window.matchMedia('(prefers-reduced-motion: reduce)').matches
+
+  const body = document.body
+  const media = document.querySelector('.hero-video-wrapper')
+  if (media) media.style.transform = ''
+
+  // Clear finished state and force a clean pre-frame (no reverse tween)
+  body.classList.add('hero-resetting')
+  body.classList.remove('hero-in', 'hero-done')
+  void hero.offsetWidth
+  body.classList.remove('hero-resetting')
+  void hero.offsetWidth
+
+  if (reduce) {
+    body.classList.add('hero-in', 'hero-done')
+    return
+  }
+
+  const start = () => {
+    // Re-trigger keyframes even if hero-in was already toggled this session
+    body.classList.remove('hero-in')
+    void hero.offsetWidth
+    body.classList.add('hero-in')
+    window.setTimeout(() => body.classList.add('hero-done'), 2600)
+  }
+
+  // Start after first paint of wiped state (don't wait on fonts — that hid the anim)
+  requestAnimationFrame(() => {
+    requestAnimationFrame(() => {
+      window.setTimeout(start, 40)
+    })
+  })
+}
+
 function initMotion() {
-  const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches
   document.documentElement.classList.add('js-ready')
 
-  // Hero entrance on first paint
-  requestAnimationFrame(() => {
-    document.body.classList.add('hero-in')
+  playHeroEntrance()
+  window.addEventListener('pageshow', (event) => {
+    // Back/forward cache restores the finished page — replay entrance
+    if (event.persisted) playHeroEntrance()
   })
+
+  const reduce =
+    document.documentElement.classList.contains('reduced-motion') ||
+    window.matchMedia('(prefers-reduced-motion: reduce)').matches
 
   if (reduce) {
     document.querySelectorAll('[data-reveal], [data-reveal-stagger] > *').forEach((el) => {
@@ -441,13 +523,14 @@ function initMotion() {
 
   revealEls.forEach((el) => io.observe(el))
 
-  // Soft parallax on hero video
+  // Soft parallax on hero video after entrance settles
   const hero = document.querySelector('.hero-shell')
   const media = document.querySelector('.hero-video-wrapper')
   if (hero && media) {
     window.addEventListener(
       'scroll',
       () => {
+        if (!document.body.classList.contains('hero-done')) return
         const rect = hero.getBoundingClientRect()
         if (rect.bottom < 0 || rect.top > window.innerHeight) return
         const progress = Math.min(1, Math.max(0, -rect.top / (rect.height || 1)))
@@ -515,7 +598,7 @@ function renderHeader() {
         <div class="container">
           <div class="navbar-wrapper">
             <a class="site-logo-wrapper" href="/" aria-label="home">
-              <img class="site-logo" src="/images/logo.svg" width="70" height="36" alt="CarFix TNC" />
+              <img class="site-logo" src="/images/zos-drop-shop-logo.png" width="160" height="99" alt="ZOS Drop Shop" />
             </a>
 
             <nav class="nav-menu-wrapper" aria-label="Primary">

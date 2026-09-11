@@ -10,8 +10,8 @@
 
 | Slot | Path |
 | --- | --- |
-| Logo | `public/images/logo.svg` or `logo.png` |
-| Hero photo | `public/images/hero.jpg` |
+| Logo | `public/images/zos-drop-shop-logo.png` |
+| Hero photo | `public/images/car-hero.png` |
 | Hero video | `public/video/hero.mp4` |
 | About photo/video | `public/images/about.jpg` / `public/video/about.mp4` |
 | Services | `public/images/services/*.jpg` |
@@ -24,7 +24,7 @@
 ## Brand tokens (already matched from live preview)
 
 - Background: `#f4f4ec`
-- Primary red: `#f3182e`
+- Primary: `#010101`
 - Body text: `#333`
 - Headings: Aspekta / 800
 - Body: Satoshi / 18px

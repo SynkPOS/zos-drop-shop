@@ -1,0 +1,68 @@
+/* === Small utilities === */
+/* UTIL */
+.swap-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 12px;
+  border-radius: var(--radius-pill);
+  background: var(--primary-50);
+  color: var(--primary-700);
+  font-size: 0.8rem;
+  font-weight: 700;
+}
+
+.checkout-wrap {
+  display: grid;
+  grid-template-columns: 1.2fr 0.8fr;
+  gap: 24px;
+}
+
+.panel {
+  background: var(--white);
+  border: 1.5px solid var(--black);
+  border-radius: var(--radius-lg);
+  padding: 28px;
+}
+
+@media (max-width: 1024px) {
+  .hero-shell,
+  .service-row,
+  .contact-grid,
+  .checkout-wrap {
+    grid-template-columns: 1fr;
+  }
+
+  .service-row:nth-child(even) .service-row-media {
+    order: 0;
+  }
+
+  .product-grid,
+  .tech-grid {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+@media (max-width: 768px) {
+  .product-grid,
+  .tech-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .container {
+    width: min(100% - 28px, var(--container));
+  }
+
+  .section {
+    padding: 72px 0;
+  }
+
+  .section.top {
+    padding-top: 0;
+    padding-bottom: 80px;
+  }
+
+  .section.bottom {
+    padding-bottom: 0;
+  }
+}

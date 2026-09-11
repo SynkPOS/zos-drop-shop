@@ -1,0 +1,300 @@
+/* === Why Choose Us mosaic === */
+/* WHY — live .section.bottom card mosaic */
+.section.bottom {
+  padding-bottom: 0;
+}
+
+.why-section {
+  padding: 160px 0 0;
+}
+
+.container.why-container {
+  width: 100%;
+  max-width: 1680px;
+  padding-left: 40px;
+  padding-right: 40px;
+  margin-inline: auto;
+}
+
+.why-contents {
+  display: flex;
+  flex-flow: column;
+  justify-content: flex-start;
+  align-items: center;
+  gap: 60px;
+  width: 100%;
+  position: relative;
+}
+
+.why-section .heading-wrapper {
+  display: flex;
+  flex-flow: column;
+  justify-content: center;
+  align-items: center;
+  gap: 20px;
+  text-align: center;
+  overflow: clip;
+}
+
+.why-heading {
+  max-width: 800px;
+  margin: 0;
+  font-family: var(--heading);
+  font-size: 60px;
+  font-weight: 500;
+  line-height: 120%;
+  text-transform: uppercase;
+  color: #000;
+}
+
+.js-ready .why-heading {
+  opacity: 0;
+  transform: translate3d(0, 50px, 0) scale(0.9);
+  transition:
+    opacity 0.9s cubic-bezier(0.22, 1, 0.36, 1),
+    transform 0.9s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.js-ready .why-heading.is-visible {
+  opacity: 1;
+  transform: translate3d(0, 0, 0) scale(1);
+}
+
+.why-choose-us-wrapper {
+  display: flex;
+  flex-flow: column;
+  gap: 40px;
+  width: 100%;
+}
+
+.why-row {
+  display: flex;
+  gap: 40px;
+  width: 100%;
+}
+
+.why-row-2 .first-card {
+  flex: 0 1 auto;
+  max-width: 643px;
+}
+
+.why-row-2 .second-card {
+  flex: 0 1 auto;
+  max-width: 917px;
+}
+
+.why-row-3 .third-card,
+.why-row-3 .fourth-card,
+.why-row-3 .five-card {
+  flex: 0 1 auto;
+  max-width: 507px;
+}
+
+.first-card,
+.second-card,
+.third-card,
+.fourth-card,
+.five-card {
+  position: relative;
+  display: flex;
+  flex-flow: column;
+  justify-content: flex-start;
+  align-items: flex-start;
+  gap: 20px;
+  width: 100%;
+  height: 380px;
+  padding: 80px 73px;
+  border: 1px solid #000;
+  border-radius: 30px;
+  overflow: clip;
+  will-change: transform;
+}
+
+.first-card {
+  background: #f3f3e0;
+}
+
+.second-card {
+  background: #cbdceb;
+  padding: 80px 201px 80px 73px;
+}
+
+.third-card {
+  background: #dff2eb;
+}
+
+.fourth-card {
+  background: #eddfdf;
+}
+
+.five-card {
+  background: #faf7f0;
+}
+
+.why-card-title {
+  width: 100%;
+  font-family: var(--heading);
+  font-size: 26px;
+  font-weight: 400;
+  line-height: 140%;
+  color: #000;
+}
+
+.why-card-text {
+  font-family: var(--paragraph);
+  font-size: 18px;
+  font-weight: 400;
+  line-height: 160%;
+  color: #333;
+}
+
+.absolute-image-1,
+.absolute-image-2,
+.absolute-image-3,
+.absolute-image-4,
+.absolute-image-5 {
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  display: block;
+  height: auto;
+  pointer-events: none;
+}
+
+.absolute-image-1 {
+  max-width: 182px;
+  right: 8%;
+}
+
+.absolute-image-2 {
+  max-width: 106px;
+  right: 8%;
+}
+
+.absolute-image-3 {
+  max-width: 106px;
+  right: 31%;
+}
+
+.absolute-image-4 {
+  max-width: 130px;
+  right: 0;
+}
+
+.absolute-image-5 {
+  max-width: 147px;
+  right: 15%;
+}
+
+@media (max-width: 991px) {
+  .container.why-container {
+    padding-left: 20px;
+    padding-right: 20px;
+  }
+
+  .why-heading {
+    font-size: 50px;
+  }
+
+  .why-row-2 {
+    flex-flow: column;
+  }
+
+  .why-row-2 .first-card,
+  .why-row-2 .second-card {
+    max-width: none;
+    flex: none;
+  }
+
+  .second-card {
+    padding-right: 92px;
+  }
+
+  .why-row-3 {
+    flex-flow: wrap;
+    margin-bottom: 20px;
+  }
+
+  .why-row-3 .third-card,
+  .why-row-3 .fourth-card,
+  .why-row-3 .five-card {
+    max-width: none;
+    flex: 1 1 calc(50% - 20px);
+  }
+}
+
+@media (max-width: 767px) {
+  .why-section {
+    padding-top: 80px;
+  }
+
+  .why-heading {
+    font-size: 40px;
+  }
+
+  .why-card-title {
+    font-size: 22px;
+  }
+
+  .first-card,
+  .second-card,
+  .third-card,
+  .fourth-card,
+  .five-card {
+    height: auto;
+    min-height: 280px;
+    padding: 50px;
+  }
+
+  .second-card {
+    padding: 50px;
+  }
+}
+
+@media (max-width: 479px) {
+  .why-heading {
+    font-size: 34px;
+  }
+
+  .why-row-3 .third-card,
+  .why-row-3 .fourth-card,
+  .why-row-3 .five-card {
+    flex: 1 1 100%;
+  }
+
+  .first-card,
+  .second-card,
+  .third-card,
+  .five-card {
+    padding: 30px;
+  }
+
+  .fourth-card {
+    gap: 11px;
+    padding: 31px;
+  }
+
+  .absolute-image-1 {
+    max-width: 130px;
+  }
+
+  .absolute-image-2 {
+    max-width: 63px;
+  }
+
+  .absolute-image-4 {
+    max-width: 103px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .js-ready .why-heading {
+    opacity: 1;
+    transform: none;
+    transition: none;
+  }
+
+  [data-why-card] {
+    transform: none !important;
+  }
+}

@@ -8,23 +8,31 @@
       name="description"
       content="Expert auto repair with certified technicians, honest pricing, and reliable service."
     />
-    <link rel="icon" href="/images/logo.svg" type="image/svg+xml" />
+    <link rel="icon" href="/images/zos-drop-shop-logo.png" type="image/png" />
     <link rel="stylesheet" href="/src/css/main.css" />
+    <!-- Apply wiped hero state BEFORE first paint so the entrance can actually run -->
+    <script>
+      document.documentElement.classList.add('js-ready')
+      if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+        document.documentElement.classList.add('reduced-motion')
+      }
+    </script>
   </head>
   <body>
+    <div class="page-wrapper">
     <div data-header></div>
 
     <main>
       <section class="hero">
         <div class="hero-shell">
-          <img class="hero-bg-image" src="/images/hero.jpg" alt="" width="1440" height="756" />
+          <img class="hero-bg-image" src="/images/car-hero.png" alt="" width="1440" height="756" />
 
           <div class="hero-contents-row">
             <div class="hero-copy">
               <div class="hero-mask">
                 <h1 class="hero-title">Trusted Auto Repair Experts</h1>
               </div>
-              <div class="hero-lead-wrap">
+              <div class="hero-mask hero-lead-mask">
                 <p class="hero-lead">
                   Your car deserves the best care. We provide expert repairs with a focus on honesty,
                   reliability, and customer satisfaction.
@@ -33,12 +41,25 @@
               <div class="hero-cta-wrap">
                 <a class="btn btn-primary" href="/contact-us.html">
                   <span>Schedule An Appointment</span>
-                  <span class="arrow">east</span>
                 </a>
               </div>
             </div>
 
             <div class="hero-video-wrapper">
+              <div class="animation-columns-wrapper" aria-hidden="true">
+                <div class="columns-wrapper">
+                  <div class="columns-background"></div>
+                </div>
+                <div class="columns-wrapper">
+                  <div class="columns-background"></div>
+                </div>
+                <div class="columns-wrapper">
+                  <div class="columns-background"></div>
+                </div>
+                <div class="columns-wrapper">
+                  <div class="columns-background"></div>
+                </div>
+              </div>
               <div class="hero-video">
                 <video autoplay muted loop playsinline poster="/images/hero-poster.jpg">
                   <source src="/video/hero.mp4" type="video/mp4" />
@@ -89,7 +110,7 @@
             />
             <img
               class="zigzag-image z-1"
-              src="/images/zigzag-2.svg"
+              src="/images/zigzag.svg"
               alt=""
               width="87"
               height="133"
@@ -168,6 +189,7 @@
             <div class="services-slider">
               <div class="services-mask">
                 <div class="services-item">
+                  <div class="services-item-inner" data-services-reveal>
                   <a class="services-card" href="/services.html">
                     <img class="services-mouse" src="/images/services/mouse-icon.svg" alt="" aria-hidden="true" />
                     <div class="services-card-media">
@@ -184,8 +206,10 @@
                       <p>Keep Your Ride Comfortable with Expert Car A/C Repairs and Maintenance</p>
                     </div>
                   </a>
+                  </div>
                 </div>
                 <div class="services-item">
+                  <div class="services-item-inner" data-services-reveal>
                   <a class="services-card" href="/services.html">
                     <img class="services-mouse" src="/images/services/mouse-icon.svg" alt="" aria-hidden="true" />
                     <div class="services-card-media">
@@ -202,8 +226,10 @@
                       <p>Precise Engine Diagnostics and Reliable Repairs for Optimal Performance</p>
                     </div>
                   </a>
+                  </div>
                 </div>
                 <div class="services-item">
+                  <div class="services-item-inner" data-services-reveal>
                   <a class="services-card" href="/services.html">
                     <img class="services-mouse" src="/images/services/mouse-icon.svg" alt="" aria-hidden="true" />
                     <div class="services-card-media">
@@ -220,8 +246,10 @@
                       <p>Reliable Battery Testing and Replacement to Keep You Powered on the Road</p>
                     </div>
                   </a>
+                  </div>
                 </div>
                 <div class="services-item">
+                  <div class="services-item-inner" data-services-reveal>
                   <a class="services-card" href="/services.html">
                     <img class="services-mouse" src="/images/services/mouse-icon.svg" alt="" aria-hidden="true" />
                     <div class="services-card-media">
@@ -238,8 +266,10 @@
                       <p>Ensure Smooth Rides with Expert Tire Rotation and Precision Alignment</p>
                     </div>
                   </a>
+                  </div>
                 </div>
                 <div class="services-item">
+                  <div class="services-item-inner" data-services-reveal>
                   <a class="services-card" href="/services.html">
                     <img class="services-mouse" src="/images/services/mouse-icon.svg" alt="" aria-hidden="true" />
                     <div class="services-card-media">
@@ -256,8 +286,15 @@
                       <p>Prevent Overheating with Expert Radiator and Cooling System Maintenance</p>
                     </div>
                   </a>
+                  </div>
                 </div>
               </div>
+              <button class="slide-arrow" type="button" data-services-prev aria-label="Previous service">
+                west
+              </button>
+              <button class="slide-arrow right" type="button" data-services-next aria-label="Next service">
+                east
+              </button>
             </div>
           </div>
         </div>
@@ -485,6 +522,7 @@
     </main>
 
     <div data-footer></div>
+    </div>
     <script type="module" src="/src/js/main.js"></script>
   </body>
 </html>
