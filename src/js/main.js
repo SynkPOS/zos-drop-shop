@@ -418,23 +418,45 @@ function initFooter() {
   const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches
   const els = [...root.querySelectorAll('[data-footer-reveal]')]
 
+  const reveal = (el) => {
+    el.classList.add('is-visible')
+  }
+
   if (reduce) {
-    els.forEach((el) => el.classList.add('is-visible'))
+    els.forEach(reveal)
     return
   }
 
+  // Do not inset the root from the bottom: the utility bar sits in the last
+  // ~6% of the viewport at max scroll, so a negative bottom rootMargin left
+  // those reveals permanently at opacity 0 (looked like a clipped footer).
   const io = new IntersectionObserver(
     (entries) => {
       entries.forEach((entry) => {
         if (!entry.isIntersecting) return
-        entry.target.classList.add('is-visible')
+        reveal(entry.target)
         io.unobserve(entry.target)
       })
     },
-    { threshold: 0.2, rootMargin: '0px 0px -6% 0px' },
+    { threshold: 0, rootMargin: '0px 0px 12% 0px' },
   )
 
   els.forEach((el) => io.observe(el))
+
+  const revealIfNearEnd = () => {
+    const doc = document.documentElement
+    const remaining = doc.scrollHeight - window.scrollY - window.innerHeight
+    if (remaining > 160) return
+    els.forEach((el) => {
+      if (el.classList.contains('is-visible')) return
+      reveal(el)
+      io.unobserve(el)
+    })
+  }
+
+  window.addEventListener('scroll', revealIfNearEnd, { passive: true })
+  window.addEventListener('resize', revealIfNearEnd, { passive: true })
+  revealIfNearEnd()
 }
 
 function playHeroEntrance() {
@@ -621,7 +643,7 @@ function renderHeader() {
                 </button>
               </div>
               <a class="nav-contact" href="/contact-us.html">
-                <span>Contact us</span>
+                <span>Talk to us</span>
                 <span class="arrow">east</span>
               </a>
               <button class="nav-toggle" type="button" aria-label="Open menu" aria-expanded="false" data-nav-toggle>
@@ -632,16 +654,16 @@ function renderHeader() {
         </div>
         <div class="mobile-nav" data-mobile-nav>
           ${mobileLinks}
-          <a class="nav-contact" href="/contact-us.html"><span>Contact us</span><span class="arrow">east</span></a>
+          <a class="nav-contact" href="/contact-us.html"><span>Talk to us</span><span class="arrow">east</span></a>
         </div>
       </div>
     </header>
     <div class="cart-drawer" data-cart>
       <div class="cart-backdrop" data-cart-close></div>
       <aside class="cart-panel" aria-label="Cart">
-        <h2>Your Cart</h2>
-        <p class="cart-empty">No items found.</p>
-        <a class="btn btn-primary" href="/checkout.html">Continue to Checkout</a>
+        <h2>Your Bag</h2>
+        <p class="cart-empty">Nothing in here yet.</p>
+        <a class="btn btn-primary" href="/checkout.html">Head to Checkout</a>
       </aside>
     </div>
   `
@@ -655,20 +677,20 @@ function renderFooter() {
         <div class="footer-wrapper">
           <div class="newsletter-block">
             <div class="footer-newsletter-title" data-footer-reveal="left">
-              Stay Updated &amp; Informed with Our Latest Tips, Offers, and Car Care News
+              Get Shop Notes, Seasonal Deals, and Maintenance Reminders
             </div>
             <form
               class="footer-form-block"
               data-footer-reveal="right"
-              onsubmit="event.preventDefault(); this.reset(); alert('Thank you! Your submission has been received!');"
+              onsubmit="event.preventDefault(); this.reset(); alert('Thanks for joining the list—we will be in touch!');"
             >
-              <label class="visually-hidden" for="footer-subscribe">Get product updates</label>
+              <label class="visually-hidden" for="footer-subscribe">Email for shop updates</label>
               <input
                 class="subscribe-input"
                 id="footer-subscribe"
                 type="email"
                 name="email"
-                placeholder="hello@yourdomain.com"
+                placeholder="you@email.com"
                 required
                 autocomplete="email"
               />
@@ -679,14 +701,14 @@ function renderFooter() {
 
         <div class="footer-logo">
           <a class="get-in-touch-button" href="/contact-us.html" data-footer-reveal="up">
-            <span>Get in Touch</span>
+            <span>Say Hello</span>
             <span class="footer-touch-icon material-icons" aria-hidden="true">call_made</span>
           </a>
           <div class="logo-wrap">
             <img
               class="footer-wordmark"
               src="/images/footer/wordmark.png"
-              alt="CarFix TNC"
+              alt="ZOS Drop Shop"
               width="1238"
               height="200"
               loading="lazy"
@@ -702,16 +724,13 @@ function renderFooter() {
             <a class="footer-link footer-link-home" href="/" aria-label="Home">
               <img class="footer-home-icon" src="/images/footer/home.svg" alt="" width="24" height="24" />
             </a>
-            <a class="footer-link" href="/about-us.html">Style Guides</a>
-            <a class="footer-link" href="/faq.html">Change-log</a>
-            <a class="footer-link" href="/checkout.html">Licensing</a>
+            <a class="footer-link" href="/about-us.html">About</a>
+            <a class="footer-link" href="/faq.html">FAQ</a>
+            <a class="footer-link" href="/checkout.html">Checkout</a>
             <a class="footer-link" href="/404.html">404</a>
           </div>
           <div class="footer-copyright" data-footer-reveal="up">
-            <span class="footer-copyright-text">Copyright © ${year} CarFix TNC | Designed by</span>
-            <a class="footer-copyright-text with-hover" href="https://tncflow.com" target="_blank" rel="noopener">TNCFlow</a>
-            <span class="footer-copyright-text">| Powered By</span>
-            <a class="footer-copyright-text with-hover" href="https://webflow.com/" target="_blank" rel="noopener">Webflow</a>
+            <span class="footer-copyright-text">© ${year} ZOS Drop Shop. All rights reserved.</span>
           </div>
         </div>
       </div>
