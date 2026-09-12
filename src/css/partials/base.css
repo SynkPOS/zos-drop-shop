@@ -62,6 +62,9 @@
   --primary-600: #000000;
   --primary-700: #000000;
   --primary-50: #f0f0f0;
+  /* CarFix accent — used on dark surfaces (hero CTA) for reference parity */
+  --accent: #f3182e;
+  --accent-600: #dd162a;
   --heading: 'Aspekta', 'Satoshi', Arial, sans-serif;
   --paragraph: 'Satoshi', Arial, sans-serif;
   --radius-xl: 48px;

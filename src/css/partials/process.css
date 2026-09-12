@@ -106,7 +106,7 @@
   }
 
   .service-3-col {
-    flex-direction: column;
+    flex-flow: column;
     gap: 24px;
   }
 
@@ -123,5 +123,42 @@
 
   .js-ready .features-card[data-reveal='spin'] {
     transform: translate3d(0, 36px, 0) scale(0.96);
+  }
+}
+
+@media (max-width: 767px) {
+  .process-section {
+    padding: 60px 0;
+  }
+
+  .service-3-col {
+    gap: 20px;
+  }
+}
+
+@media (max-width: 479px) {
+  .container.process-container {
+    padding-left: 15px;
+    padding-right: 15px;
+  }
+
+  .features-card {
+    border-radius: 30px;
+    padding: 30px;
+    font-size: 16px;
+  }
+
+  .features-card-title {
+    font-size: 22px;
+  }
+
+  .features-card p,
+  .features-card-text {
+    font-size: 16px;
+    line-height: 26px;
+  }
+
+  .zigzag-image {
+    display: none;
   }
 }

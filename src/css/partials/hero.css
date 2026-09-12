@@ -17,6 +17,7 @@
   border-radius: 60px;
   overflow: clip;
   color: #fff;
+  box-sizing: border-box;
 }
 
 .hero-bg-image {
@@ -96,6 +97,7 @@
   overflow: hidden;
 }
 
+/* Cream CTA on black shell — ZOS style (not live red) */
 .hero-cta-wrap .btn,
 .hero-cta-wrap .btn-primary {
   background: #f4f4ec;
@@ -161,6 +163,7 @@
 .hero-video video {
   position: absolute;
   inset: 0;
+  z-index: 0;
   width: 100%;
   height: 100%;
   object-fit: cover;
@@ -169,7 +172,7 @@
   background: #111 url('/images/hero-poster.jpg') center/cover no-repeat;
 }
 
-/* Live: Subtract SVG is a black cover with transparent arch windows over the video */
+/* Live Subtract SVG overlay — sized like live background-size */
 .hero-video-arch {
   position: absolute;
   left: 50%;
@@ -253,28 +256,28 @@
   }
 
   .hero-title {
-    font-size: clamp(42px, 6vw, 64px);
-    line-height: 1.15;
+    font-size: clamp(48px, 5.5vw, 72px);
+    line-height: 1.2;
   }
 
   .hero-video-wrapper {
-    width: min(100%, 480px);
-    height: 520px;
+    width: min(100%, 555px);
+    height: auto;
   }
 }
 
 @media (max-width: 991px) {
   .hero-shell {
-    width: min(100% - 24px, 1760px);
-    border-radius: 40px;
-    min-height: 0;
     height: auto;
+    min-height: 0;
+    border-radius: 40px;
   }
 
   .hero-contents-row {
     flex-direction: column;
     align-items: stretch;
-    padding: 64px 28px 40px;
+    padding: 60px;
+    gap: 40px;
   }
 
   .hero-copy {
@@ -283,8 +286,8 @@
   }
 
   .hero-title {
-    font-size: 42px;
-    line-height: 1.15;
+    font-size: 60px;
+    line-height: 1.2;
   }
 
   .hero-cta-wrap {
@@ -294,7 +297,20 @@
   .hero-video-wrapper {
     width: 100%;
     max-width: none;
-    height: 420px;
+    height: auto;
+    max-height: none;
+  }
+
+  .hero-video {
+    width: 100%;
+    height: auto;
+    aspect-ratio: 437 / 461;
+  }
+
+  .hero-video-arch {
+    width: 100%;
+    height: 100%;
+    max-width: none;
   }
 
   .hero-social {
@@ -302,7 +318,82 @@
   }
 
   .hero-bg-image {
-    top: 80px;
-    height: calc(100% - 80px);
+    top: auto;
+    bottom: 55%;
+    height: auto;
+  }
+}
+
+@media (max-width: 767px) {
+  .hero {
+    min-height: 0;
+  }
+
+  .hero-contents-row {
+    padding: 44px;
+    gap: 36px;
+  }
+
+  .hero-title {
+    font-size: 60px;
+    line-height: 1.2;
+  }
+
+  .hero-lead {
+    font-size: 16px;
+    line-height: 26px;
+  }
+
+  .hero-video {
+    width: 437px;
+    max-width: 100%;
+    height: 461px;
+    aspect-ratio: auto;
+  }
+
+  .hero-video-arch {
+    width: 482px;
+    height: 477px;
+  }
+}
+
+@media (max-width: 479px) {
+  .hero-shell {
+    border-radius: 30px;
+  }
+
+  .hero-contents-row {
+    padding: 29px;
+    row-gap: 40px;
+  }
+
+  .hero-title {
+    font-size: 40px;
+    line-height: 1.2;
+  }
+
+  .hero-cta-wrap {
+    margin-top: 24px;
+  }
+
+  .hero-video-wrapper {
+    max-height: 300px;
+  }
+
+  .hero-video {
+    width: 100%;
+    height: 247px;
+    aspect-ratio: auto;
+  }
+
+  .hero-video-arch {
+    width: 336px;
+    height: 250px;
+  }
+
+  .hero-bg-image {
+    bottom: 39%;
+    left: 10%;
+    width: 90%;
   }
 }

@@ -188,9 +188,13 @@
   color: #000;
 }
 
-@media (max-width: 1100px) {
+@media (max-width: 991px) {
+  .services-catalog-section {
+    padding: 80px 0;
+  }
+
   .services-catalog-heading {
-    font-size: clamp(34px, 5vw, 50px);
+    font-size: 50px;
   }
 
   .services-catalog-row {
@@ -202,23 +206,22 @@
     flex: none;
     height: auto;
     min-height: 0;
+    padding: 60px;
   }
 
   .service-tile--wide {
-    flex-flow: column;
-    align-items: flex-start;
-    padding: 48px 40px;
+    flex-flow: row;
+    align-items: center;
   }
 
   .service-tile--tall {
-    padding: 48px 40px;
-    gap: 28px;
+    justify-content: flex-start;
     align-items: flex-start;
   }
 
   .service-tile--wide .service-tile-media,
   .service-tile--tall .service-tile-media {
-    max-width: none;
+    max-width: 280px;
   }
 
   .service-tile-img {
@@ -234,7 +237,7 @@
 
 @media (max-width: 767px) {
   .services-catalog-section {
-    padding: 64px 0 80px;
+    padding: 60px 0;
   }
 
   .container.services-catalog-container {
@@ -242,22 +245,34 @@
     padding-right: 20px;
   }
 
+  .services-catalog-heading {
+    font-size: 40px;
+  }
+
   .services-catalog-contents {
     gap: 36px;
   }
 
   .services-catalog-rows {
-    gap: 24px;
+    gap: 30px;
   }
 
   .services-catalog-row {
-    gap: 24px;
+    gap: 30px;
   }
 
-  .service-tile {
-    gap: 24px;
-    padding: 32px 24px;
-    border-radius: 40px;
+  .service-tile,
+  .service-tile--wide,
+  .service-tile--tall {
+    flex-flow: column;
+    gap: 30px;
+    padding: 47px;
+    align-items: flex-start;
+  }
+
+  .service-tile--wide .service-tile-media,
+  .service-tile--tall .service-tile-media {
+    max-width: none;
   }
 
   .service-tile-title {
@@ -272,6 +287,42 @@
 
   .service-tile:hover {
     transform: none;
+  }
+}
+
+@media (max-width: 479px) {
+  .services-catalog-section {
+    padding: 60px 0 80px;
+  }
+
+  .container.services-catalog-container {
+    padding-left: 15px;
+    padding-right: 15px;
+  }
+
+  .services-catalog-heading {
+    font-size: 34px;
+  }
+
+  .services-catalog-rows {
+    gap: 20px;
+  }
+
+  .services-catalog-row {
+    gap: 20px;
+  }
+
+  .service-tile,
+  .service-tile--wide,
+  .service-tile--tall {
+    gap: 20px;
+    padding: 35px;
+    border-radius: 40px;
+  }
+
+  .service-tile-title {
+    font-size: 24px;
+    line-height: 34px;
   }
 }
 
