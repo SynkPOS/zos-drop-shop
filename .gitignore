@@ -13,3 +13,5 @@ dist
 # Scratch
 _extract.py
 _pages.js
+
+.vercel
