@@ -236,8 +236,8 @@
 }
 
 @media (max-width: 767px) {
-  .services-catalog-section {
-    padding: 60px 0;
+  .section.services-catalog-section {
+    padding: 36px 0;
   }
 
   .container.services-catalog-container {
@@ -291,8 +291,8 @@
 }
 
 @media (max-width: 479px) {
-  .services-catalog-section {
-    padding: 60px 0 80px;
+  .section.services-catalog-section {
+    padding: 36px 0;
   }
 
   .container.services-catalog-container {

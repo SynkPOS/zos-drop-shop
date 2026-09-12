@@ -249,7 +249,8 @@
 }
 
 @media (max-width: 767px) {
-  .blog-section {
+  .section.top.blog-section {
+    padding-top: 36px;
     padding-bottom: 80px;
   }
 
@@ -303,6 +304,11 @@
 }
 
 @media (max-width: 479px) {
+  .section.top.blog-section {
+    padding-top: 36px;
+    padding-bottom: 80px;
+  }
+
   .blog-section-heading {
     font-size: 34px;
   }

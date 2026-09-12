@@ -52,15 +52,19 @@
   align-items: flex-start;
   width: min(100%, 680px);
   max-width: 780px;
+  container-type: inline-size;
+  container-name: hero-copy;
 }
 
 .hero-mask {
   position: relative;
   overflow: hidden;
+  max-width: 100%;
 }
 
 .hero-title {
   margin: 0;
+  max-width: 100%;
   font-family: var(--heading);
   font-size: 80px;
   font-weight: 800;
@@ -73,6 +77,7 @@
 .hero-title-line {
   display: block;
   white-space: nowrap;
+  max-width: 100%;
 }
 
 .hero-lead-mask {
@@ -169,7 +174,7 @@
   object-fit: cover;
   object-position: center;
   display: block;
-  background: #111 url('/images/hero-poster.jpg') center/cover no-repeat;
+  background: #000;
 }
 
 /* Live Subtract SVG overlay — sized like live background-size */
@@ -283,15 +288,34 @@
   .hero-copy {
     width: 100%;
     max-width: none;
+    align-items: center;
+  }
+
+  /*
+    Keep lines left-aligned, but center the title block so the longest
+    line ("CARE YOU CAN") has matching space to the shell edges.
+  */
+  .hero-mask:has(.hero-title) {
+    width: max-content;
+    max-width: 100%;
   }
 
   .hero-title {
-    font-size: 60px;
-    line-height: 1.2;
+    width: max-content;
+    max-width: 100%;
+    margin-inline: auto;
+    font-size: min(60px, 12.2cqi);
+    line-height: 1.15;
+    text-align: left;
+  }
+
+  .hero-lead-mask {
+    width: 100%;
   }
 
   .hero-cta-wrap {
     margin-top: 36px;
+    align-self: flex-start;
   }
 
   .hero-video-wrapper {
@@ -335,8 +359,8 @@
   }
 
   .hero-title {
-    font-size: 60px;
-    line-height: 1.2;
+    font-size: min(48px, 12.2cqi);
+    line-height: 1.15;
   }
 
   .hero-lead {
@@ -368,8 +392,8 @@
   }
 
   .hero-title {
-    font-size: 40px;
-    line-height: 1.2;
+    font-size: min(36px, 12cqi);
+    line-height: 1.15;
   }
 
   .hero-cta-wrap {

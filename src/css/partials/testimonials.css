@@ -158,8 +158,8 @@
 }
 
 @media (max-width: 767px) {
-  .testimonials {
-    padding: 80px 0;
+  .section.testimonials {
+    padding: 36px 0;
   }
 
   .testimonials-heading {
@@ -188,6 +188,10 @@
 }
 
 @media (max-width: 479px) {
+  .section.testimonials {
+    padding: 36px 0;
+  }
+
   .testimonials-heading {
     font-size: 34px;
   }

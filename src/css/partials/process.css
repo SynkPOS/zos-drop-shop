@@ -96,7 +96,7 @@
 }
 
 @media (max-width: 991px) {
-  .process-section {
+  .section.process-section {
     padding: 80px 0;
   }
 
@@ -127,8 +127,8 @@
 }
 
 @media (max-width: 767px) {
-  .process-section {
-    padding: 60px 0;
+  .section.process-section {
+    padding: 60px 0 40px;
   }
 
   .service-3-col {
@@ -140,6 +140,10 @@
   .container.process-container {
     padding-left: 15px;
     padding-right: 15px;
+  }
+
+  .section.process-section {
+    padding-bottom: 36px;
   }
 
   .features-card {
