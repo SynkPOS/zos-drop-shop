@@ -1,3 +1,9 @@
+/* Concept homepage: links look clickable but do nothing */
+html.concept-home a,
+html.concept-home button {
+  cursor: default;
+}
+
 /* === Small utilities === */
 /* UTIL */
 .swap-chip {

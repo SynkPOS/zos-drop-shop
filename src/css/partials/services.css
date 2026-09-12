@@ -1,35 +1,46 @@
-/* === Sticky services gallery === */
-/* SERVICES — sticky horizontal scroll gallery (live .section.slider) */
-.services-pin-section {
-  position: relative;
-  height: 180vw;
-  padding: 160px 0 0;
-  padding-bottom: 0;
-  overflow: visible;
+/* === Services catalog (live /services pastel tiles) === */
+
+.services-catalog-section {
+  padding: 100px 0 120px;
 }
 
-.container.services-heading-container {
+.container.services-catalog-container {
   width: 100%;
-  max-width: none;
+  max-width: 1680px;
   padding-left: 40px;
   padding-right: 40px;
   margin-inline: auto;
 }
 
-.services-heading-wrap {
+.services-catalog-contents {
   display: flex;
   flex-flow: column;
-  justify-content: flex-start;
+  align-items: stretch;
+  gap: 60px;
+  width: 100%;
+}
+
+.services-catalog-heading-wrap {
+  display: flex;
+  flex-flow: column;
   align-items: flex-start;
   gap: 20px;
-  width: 800px;
-  max-width: 100%;
-  text-align: left;
+  max-width: 800px;
   overflow: clip;
 }
 
-.services-heading {
-  max-width: 800px;
+.services-catalog-heading-wrap--center {
+  align-items: center;
+  max-width: none;
+  text-align: center;
+}
+
+.services-catalog-heading-wrap--center .services-catalog-heading {
+  text-align: center;
+  max-width: 900px;
+}
+
+.services-catalog-heading {
   margin: 0;
   font-family: var(--heading);
   font-size: 60px;
@@ -39,387 +50,243 @@
   color: #000;
 }
 
-/* Live a-11 “Slide In From Bottom” on .heading / .item */
-.js-ready .services-heading[data-reveal] {
+.js-ready .services-catalog-heading[data-reveal] {
   opacity: 0;
   transform: translate3d(0, 50px, 0) scale(0.9);
   transition:
-    opacity 1s ease 0.5s,
-    transform 1s cubic-bezier(0.16, 1, 0.3, 1) 0.5s;
+    opacity 1s ease 0.15s,
+    transform 1s cubic-bezier(0.16, 1, 0.3, 1) 0.15s;
 }
 
-.js-ready .services-heading[data-reveal].is-visible {
+.js-ready .services-catalog-heading[data-reveal].is-visible {
   opacity: 1;
-  transform: translate3d(0, 0, 0) scale(1);
+  transform: none;
 }
 
-.services-camera {
-  position: sticky;
-  top: 138px;
-  /* 100% = layout width (excludes scrollbar). 100vw made the right inset look tighter. */
-  width: 100%;
-  height: 100vh;
-  margin-top: 60px;
-  padding-left: 40px;
-  padding-right: 40px;
-  box-sizing: border-box;
-  /* Clip to the padded window so default view is exactly 3 cards */
-  overflow: hidden;
-}
-
-.services-frame {
+.services-catalog-rows {
   display: flex;
-  align-items: stretch;
-  justify-content: flex-start;
-  gap: 0;
-  width: 100%;
-  height: 529px;
-  will-change: transform;
-  transform-style: preserve-3d;
-}
-
-.services-slider {
-  position: relative;
-  width: 100%;
-  height: 100%;
-  background: transparent;
-}
-
-/* Each slide = 1/3 of the visible window (minus gutters). 5 slides in a row; scroll reveals 4–5. */
-.services-mask {
-  display: block;
-  width: calc((100% - 32px) / 3);
-  height: 100%;
-  overflow: visible;
-  white-space: nowrap;
-  font-size: 0;
-}
-
-.services-item {
-  position: relative;
-  display: inline-block;
-  vertical-align: top;
-  white-space: normal;
-  font-size: 18px;
-  width: 100%;
-  height: 100%;
-  margin: 0 16px 0 0;
-  overflow: visible;
-  cursor: pointer;
-  box-sizing: border-box;
-}
-
-.services-item:last-child {
-  margin-right: 0;
-}
-
-/* Live .item — scroll reveal wrapper (overflow:hidden, flex) */
-.services-item-inner {
-  position: relative;
-  display: flex;
-  flex-flow: row wrap;
-  justify-content: center;
-  align-items: center;
-  width: 100%;
-  height: 100%;
-  padding: 0;
-  overflow: hidden;
-  cursor: pointer;
-}
-
-.js-ready .services-item-inner {
-  opacity: 0;
-  transform: translate3d(0, 50px, 0) scale(0.9);
-  transition:
-    opacity 1s ease 0.5s,
-    transform 1s cubic-bezier(0.16, 1, 0.3, 1) 0.5s;
-}
-
-.js-ready .services-item-inner.is-visible {
-  opacity: 1;
-  transform: translate3d(0, 0, 0) scale(1);
-}
-
-@media (prefers-reduced-motion: reduce) {
-  .js-ready .services-item-inner {
-    opacity: 1;
-    transform: none;
-    transition: none;
-  }
-}
-
-.services-card {
-  position: relative;
-  z-index: 2;
-  display: flex;
-  flex-flow: row nowrap;
-  align-items: center;
+  flex-flow: column;
   gap: 40px;
   width: 100%;
-  height: 100%;
-  margin: 0;
-  padding: 70px 50px;
-  background: var(--black);
-  border-radius: 30px;
-  color: var(--black);
-  text-decoration: none;
-  overflow: visible;
-  cursor: none;
-  box-sizing: border-box;
 }
 
-.services-card-media {
-  position: relative;
+.services-catalog-row {
+  display: flex;
+  gap: 40px;
+  width: 100%;
+  align-items: stretch;
+}
+
+.service-tile {
+  display: flex;
+  gap: 40px;
+  width: 100%;
+  height: 600px;
+  padding: 90px;
+  border: 1px solid #000;
+  border-radius: 60px;
+  text-decoration: none;
+  color: #000;
+  overflow: clip;
+  transition: transform 0.5s ease;
+}
+
+.service-tile:hover {
+  transform: translate3d(0, -20px, 0);
+  color: #000;
+}
+
+.service-tile--wide {
+  flex: 1.42 1 0;
+  flex-flow: row;
+  justify-content: flex-start;
+  align-items: center;
+}
+
+.service-tile--tall {
   flex: 1 1 0;
-  min-width: 0;
+  flex-flow: column;
+  justify-content: center;
+  align-items: center;
+  gap: 50px;
+  padding: 100px 90px;
+}
+
+.service-tile--blue {
+  background: #cbdceb;
+}
+
+.service-tile--yellow {
+  background: #f3f3e0;
+}
+
+.service-tile--blush {
+  background: #eddfe0;
+}
+
+.service-tile--cream {
+  background: #faf7f0;
+}
+
+.service-tile--mint {
+  background: #dff2eb;
+}
+
+.service-tile-media {
+  position: relative;
   width: 100%;
   overflow: clip;
 }
 
-.services-card-image {
+.service-tile--wide .service-tile-media {
+  max-width: 364px;
+}
+
+.service-tile--tall .service-tile-media {
+  max-width: 448px;
+}
+
+.service-tile-img {
   display: block;
   width: 100%;
-  max-width: 219px;
   height: 389px;
   object-fit: cover;
-  object-position: 50% 0%;
   border: 1px solid #595959;
-  border-radius: 100px;
+  border-radius: 60px;
 }
 
-.services-card-copy {
+.service-tile--tall .service-tile-img {
+  border-radius: 40px;
+}
+
+.service-tile-copy {
   display: flex;
   flex-flow: column;
-  justify-content: center;
-  align-items: flex-start;
   gap: 16px;
-  flex: 1 1 0;
-  min-width: 0;
   width: 100%;
-  max-width: 286px;
 }
 
-.services-card-title {
+.service-tile--wide .service-tile-copy {
+  max-width: 350px;
+  justify-content: center;
+}
+
+.service-tile-title {
   font-family: var(--heading);
   font-size: 30px;
-  font-weight: 500;
+  font-weight: 700;
   line-height: 40px;
-  letter-spacing: 0.9px;
-  color: var(--white);
-  transition: color 0.4s ease;
+  color: inherit;
 }
 
-.services-card-title:hover {
-  color: var(--primary);
-}
-
-.services-card-copy p {
+.service-tile-desc {
   margin: 0;
-  font-family: var(--heading);
+  font-family: var(--paragraph);
   font-size: 18px;
   font-weight: 400;
   line-height: 28px;
-  color: rgba(230, 230, 230, 0.9);
-}
-
-.services-mouse {
-  z-index: 3;
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  width: 80px;
-  height: 80px;
-  max-width: 80px;
-  margin: -40px 0 0 -40px;
-  pointer-events: none;
-  opacity: 0;
-  transform: translate3d(var(--mx, 0%), var(--my, 0%), 0) scale(0);
-  transition:
-    opacity 0.5s ease,
-    transform 0.5s ease;
-  will-change: transform, opacity;
-}
-
-.services-card.is-cursor .services-mouse {
-  opacity: 1;
-  transform: translate3d(var(--mx, 0%), var(--my, 0%), 0) scale(1);
-}
-
-/* Live .slide-arrow — hidden on desktop, shown ≤991px */
-.slide-arrow {
-  display: none;
-  position: absolute;
-  z-index: 3;
-  inset: -23% 11% auto auto;
-  width: 60px;
-  height: 60px;
-  padding: 0;
-  border: 0;
-  border-radius: 50px;
-  background: #fff;
   color: #000;
-  font-family: 'Material Icons', sans-serif;
-  font-size: 24px;
-  line-height: 24px;
-  align-items: center;
-  justify-content: center;
-  cursor: pointer;
-  transition:
-    transform 0.5s ease,
-    background-color 0.5s ease,
-    color 0.5s ease;
 }
 
-.slide-arrow.right {
-  right: 5%;
-}
-
-.slide-arrow:hover {
-  background: var(--primary);
-  color: #fff;
-  transform: scale(1.1);
-}
-
-@media (max-width: 991px) {
-  .services-pin-section {
-    height: auto;
-    padding: 80px 0;
+@media (max-width: 1100px) {
+  .services-catalog-heading {
+    font-size: clamp(34px, 5vw, 50px);
   }
 
-  .container.services-heading-container {
-    padding-left: 20px;
-    padding-right: 20px;
-  }
-
-  .services-heading {
-    font-size: 50px;
-  }
-
-  .services-camera {
-    position: static;
-    top: auto;
-    width: auto;
-    height: auto;
-    margin-top: 100px;
-    padding-left: 20px;
-    padding-right: 20px;
-    overflow: visible;
-  }
-
-  .services-frame {
-    /* live .frame goes column but only wraps one slider — keep row track */
-    flex-flow: row;
-    gap: 2px;
-    transform: none !important;
-    overflow-x: auto;
-    scrollbar-width: none;
-  }
-
-  .services-frame::-webkit-scrollbar {
-    display: none;
-  }
-
-  .services-slider {
-    position: relative;
-    width: 100%;
-    height: auto;
-    min-height: 529px;
-  }
-
-  /* live .mask-size { width: 51% } — still a horizontal strip, not stacked */
-  .services-mask {
-    display: block;
-    width: 51%;
-    height: auto;
-    min-height: 529px;
-    white-space: nowrap;
-    font-size: 0;
-  }
-
-  .services-item {
-    display: inline-block;
-    vertical-align: top;
-    white-space: normal;
-    font-size: 18px;
-    width: 100%;
-    height: auto;
-    min-height: 529px;
-    margin-right: 2px;
-    overflow: hidden;
-  }
-
-  .services-card {
+  .services-catalog-row {
     flex-flow: column;
+  }
+
+  .service-tile--wide,
+  .service-tile--tall {
+    flex: none;
     height: auto;
-    min-height: 529px;
-    gap: 40px;
-    cursor: pointer;
+    min-height: 0;
   }
 
-  .services-mouse {
-    display: none;
+  .service-tile--wide {
+    flex-flow: column;
+    align-items: flex-start;
+    padding: 48px 40px;
   }
 
-  .services-card-image {
-    border-radius: 60px;
+  .service-tile--tall {
+    padding: 48px 40px;
+    gap: 28px;
+    align-items: flex-start;
+  }
+
+  .service-tile--wide .service-tile-media,
+  .service-tile--tall .service-tile-media {
     max-width: none;
   }
 
-  .services-card-title {
-    font-size: 27px;
+  .service-tile-img {
+    height: auto;
+    aspect-ratio: 4 / 3;
+    max-height: 320px;
   }
 
-  .slide-arrow {
-    display: flex;
-    inset: -10% auto auto 0%;
-  }
-
-  .slide-arrow.right {
-    inset: -10% 0% auto auto;
+  .service-tile--wide .service-tile-copy {
+    max-width: none;
   }
 }
 
 @media (max-width: 767px) {
-  .services-heading {
-    font-size: 40px;
+  .services-catalog-section {
+    padding: 64px 0 80px;
   }
 
-  .services-mask {
-    width: 70%;
-  }
-
-  .services-mouse {
-    max-width: 50px;
-  }
-
-  .slide-arrow {
-    width: 50px;
-    height: 50px;
-    font-size: 20px;
-    line-height: 20px;
-  }
-}
-
-@media (max-width: 479px) {
-  .services-heading {
-    font-size: 34px;
-  }
-
-  .services-camera {
+  .container.services-catalog-container {
     padding-left: 20px;
     padding-right: 20px;
   }
 
-  .services-mask {
-    width: 100%;
+  .services-catalog-contents {
+    gap: 36px;
   }
 
-  .services-card {
-    gap: 30px;
-    padding: 40px 28px;
+  .services-catalog-rows {
+    gap: 24px;
   }
 
-  .services-card-image {
-    height: 303px;
+  .services-catalog-row {
+    gap: 24px;
+  }
+
+  .service-tile {
+    gap: 24px;
+    padding: 32px 24px;
+    border-radius: 40px;
+  }
+
+  .service-tile-title {
+    font-size: 24px;
+    line-height: 32px;
+  }
+
+  .service-tile-desc {
+    font-size: 16px;
+    line-height: 26px;
+  }
+
+  .service-tile:hover {
+    transform: none;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .js-ready .services-catalog-heading[data-reveal] {
+    opacity: 1;
+    transform: none;
+    transition: none;
+  }
+
+  .service-tile {
+    transition: none;
+  }
+
+  .service-tile:hover {
+    transform: none;
   }
 }

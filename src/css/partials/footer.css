@@ -164,11 +164,10 @@
   font-weight: 400;
   line-height: 160%;
   text-decoration: none;
-  transition: color 0.3s ease;
 }
 
 .get-in-touch-button:hover {
-  color: var(--primary);
+  color: #fff;
 }
 
 .footer-touch-icon {
@@ -183,13 +182,20 @@
   color: #000;
   font-size: 24px;
   line-height: 1;
+  transition: transform 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  will-change: transform;
+}
+
+/* Live IX2 a-67: icon moves 8px / -16px — skip live icon/bg color swap */
+.get-in-touch-button:hover .footer-touch-icon {
+  transform: translate3d(8px, -16px, 0);
 }
 
 .logo-wrap {
   position: relative;
   z-index: 1;
   width: 100%;
-  overflow: clip;
+  overflow: visible;
 }
 
 .footer-wordmark {
@@ -236,11 +242,10 @@
   font-weight: 400;
   line-height: 32px;
   text-decoration: none;
-  transition: color 0.4s ease;
 }
 
 .footer-link:hover {
-  color: var(--primary);
+  color: #fff;
 }
 
 .footer-link-home {

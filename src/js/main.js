@@ -12,17 +12,70 @@ function currentPath() {
   return path.endsWith('/') ? path : path
 }
 
+/** Concept demo: homepage only — no navigation or chrome actions. */
+function isConceptHome() {
+  const path = window.location.pathname.replace(/\\/g, '/')
+  return (
+    path === '/' ||
+    path.endsWith('/index.html') ||
+    /\/zos-drop-shop\/?$/.test(path) ||
+    /\/zos-drop-shop\/index\.html$/.test(path)
+  )
+}
+
+function linkHref(href) {
+  return isConceptHome() ? '#' : href
+}
+
 function isActive(href) {
   const path = currentPath()
   if (href === '/') return path === '/' || path.endsWith('/zos-drop-shop/') || path.endsWith('/zos-drop-shop')
   return path.endsWith(href) || path.endsWith(href.replace('.html', ''))
 }
 
+function initConceptHomeLock() {
+  if (!isConceptHome()) return
+  document.documentElement.classList.add('concept-home')
+
+  document.addEventListener(
+    'click',
+    (event) => {
+      const el = event.target.closest('a, button, [data-cart-open], [data-search-toggle], [data-nav-toggle]')
+      if (!el) return
+      event.preventDefault()
+      event.stopPropagation()
+    },
+    true,
+  )
+
+  document.addEventListener(
+    'submit',
+    (event) => {
+      event.preventDefault()
+      event.stopPropagation()
+    },
+    true,
+  )
+}
+
 export function mountChrome() {
+  initConceptHomeLock()
+
   const header = document.querySelector('[data-header]')
   const footer = document.querySelector('[data-footer]')
   if (header) header.innerHTML = renderHeader()
   if (footer) footer.innerHTML = renderFooter()
+
+  if (isConceptHome()) {
+    initServicesPin()
+    initLogoMarquee()
+    initWhySection()
+    initTestimonials()
+    initBlogSection()
+    initFooter()
+    initMotion()
+    return
+  }
 
   const toggle = document.querySelector('[data-nav-toggle]')
   const mobile = document.querySelector('[data-mobile-nav]')
@@ -604,14 +657,14 @@ function renderHeader() {
     (l) => `
       <li class="nav-list">
         <div class="nav-icon-and-text-wrapper">
-          <a href="${l.href}" class="nav-link ${isActive(l.href) ? 'is-active' : ''}">${l.label}</a>
+          <a href="${linkHref(l.href)}" class="nav-link ${isActive(l.href) ? 'is-active' : ''}">${l.label}</a>
           <div class="nav-border" aria-hidden="true"></div>
         </div>
       </li>`,
   ).join('')
 
   const mobileLinks = NAV_LINKS.map(
-    (l) => `<a href="${l.href}" class="${isActive(l.href) ? 'is-active' : ''}">${l.label}</a>`,
+    (l) => `<a href="${linkHref(l.href)}" class="${isActive(l.href) ? 'is-active' : ''}">${l.label}</a>`,
   ).join('')
 
   return `
@@ -619,7 +672,7 @@ function renderHeader() {
       <div class="navbar" role="banner">
         <div class="container">
           <div class="navbar-wrapper">
-            <a class="site-logo-wrapper" href="/" aria-label="home">
+            <a class="site-logo-wrapper" href="${linkHref('/')}" aria-label="home">
               <img class="site-logo" src="/images/zos-drop-shop-logo.png" width="160" height="99" alt="ZOS Drop Shop" />
             </a>
 
@@ -642,7 +695,7 @@ function renderHeader() {
                   <span class="cart-qty">0</span>
                 </button>
               </div>
-              <a class="nav-contact" href="/contact-us.html">
+              <a class="nav-contact" href="${linkHref('/contact-us.html')}">
                 <span>Talk to us</span>
                 <span class="arrow">east</span>
               </a>
@@ -654,7 +707,7 @@ function renderHeader() {
         </div>
         <div class="mobile-nav" data-mobile-nav>
           ${mobileLinks}
-          <a class="nav-contact" href="/contact-us.html"><span>Talk to us</span><span class="arrow">east</span></a>
+          <a class="nav-contact" href="${linkHref('/contact-us.html')}"><span>Talk to us</span><span class="arrow">east</span></a>
         </div>
       </div>
     </header>
@@ -663,7 +716,7 @@ function renderHeader() {
       <aside class="cart-panel" aria-label="Cart">
         <h2>Your Bag</h2>
         <p class="cart-empty">Nothing in here yet.</p>
-        <a class="btn btn-primary" href="/checkout.html">Head to Checkout</a>
+        <a class="btn btn-primary" href="${linkHref('/checkout.html')}">Head to Checkout</a>
       </aside>
     </div>
   `
@@ -671,18 +724,21 @@ function renderHeader() {
 
 function renderFooter() {
   const year = new Date().getFullYear()
+  const formSubmit = isConceptHome()
+    ? 'event.preventDefault();'
+    : "event.preventDefault(); this.reset(); alert('Thanks for signing up. We will be in touch.');"
   return `
     <footer class="site-footer" data-footer-root>
       <div class="footer-container">
         <div class="footer-wrapper">
           <div class="newsletter-block">
             <div class="footer-newsletter-title" data-footer-reveal="left">
-              Get Shop Notes, Seasonal Deals, and Maintenance Reminders
+              Get shop notes, seasonal deals, and maintenance reminders
             </div>
             <form
               class="footer-form-block"
               data-footer-reveal="right"
-              onsubmit="event.preventDefault(); this.reset(); alert('Thanks for joining the list—we will be in touch!');"
+              onsubmit="${formSubmit}"
             >
               <label class="visually-hidden" for="footer-subscribe">Email for shop updates</label>
               <input
@@ -700,7 +756,7 @@ function renderFooter() {
         </div>
 
         <div class="footer-logo">
-          <a class="get-in-touch-button" href="/contact-us.html" data-footer-reveal="up">
+          <a class="get-in-touch-button" href="${linkHref('/contact-us.html')}" data-footer-reveal="up">
             <span>Say Hello</span>
             <span class="footer-touch-icon material-icons" aria-hidden="true">call_made</span>
           </a>
@@ -721,13 +777,13 @@ function renderFooter() {
       <div class="footer-bottom">
         <div class="footer-bottom-wrapper">
           <div class="footer-bottom-list" data-footer-reveal="up">
-            <a class="footer-link footer-link-home" href="/" aria-label="Home">
+            <a class="footer-link footer-link-home" href="${linkHref('/')}" aria-label="Home">
               <img class="footer-home-icon" src="/images/footer/home.svg" alt="" width="24" height="24" />
             </a>
-            <a class="footer-link" href="/about-us.html">About</a>
-            <a class="footer-link" href="/faq.html">FAQ</a>
-            <a class="footer-link" href="/checkout.html">Checkout</a>
-            <a class="footer-link" href="/404.html">404</a>
+            <a class="footer-link" href="${linkHref('/about-us.html')}">About</a>
+            <a class="footer-link" href="${linkHref('/faq.html')}">FAQ</a>
+            <a class="footer-link" href="${linkHref('/checkout.html')}">Checkout</a>
+            <a class="footer-link" href="${linkHref('/404.html')}">404</a>
           </div>
           <div class="footer-copyright" data-footer-reveal="up">
             <span class="footer-copyright-text">© ${year} ZOS Drop Shop. All rights reserved.</span>
