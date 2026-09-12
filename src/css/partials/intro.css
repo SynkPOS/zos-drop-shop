@@ -257,17 +257,18 @@
   /*
     Match: process cards → intro heading
          = intro pills → divider line
+         = divider → next section
     (process pad-bottom + intro pad-top === intro-contents pad-bottom)
   */
   .section.intro-block {
     padding-top: 40px;
-    padding-bottom: 40px;
+    padding-bottom: 0;
   }
 
   .intro-contents {
     margin-top: 0;
     gap: 16px;
-    padding-bottom: 80px;
+    padding-bottom: 72px;
   }
 
   .intro-heading {
@@ -298,7 +299,7 @@
 
   .section.intro-block {
     padding-top: 36px;
-    padding-bottom: 36px;
+    padding-bottom: 0;
   }
 
   .intro-contents {

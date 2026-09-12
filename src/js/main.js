@@ -269,7 +269,8 @@ function initWhySection() {
         headingIo.unobserve(entry.target)
       })
     },
-    { threshold: 0.4, rootMargin: '0px 0px -8% 0px' },
+    /* Reveal as soon as it nears the viewport — avoid invisible blank section gaps */
+    { threshold: 0, rootMargin: '40% 0px 20% 0px' },
   )
   if (heading) headingIo.observe(heading)
 
@@ -335,7 +336,7 @@ function initTestimonials() {
         headingIo.unobserve(entry.target)
       })
     },
-    { threshold: 0.4, rootMargin: '0px 0px -8% 0px' },
+    { threshold: 0, rootMargin: '40% 0px 20% 0px' },
   )
   if (heading) headingIo.observe(heading)
 
@@ -404,7 +405,7 @@ function initBlogSection() {
         headingIo.unobserve(entry.target)
       })
     },
-    { threshold: 0.4, rootMargin: '0px 0px -8% 0px' },
+    { threshold: 0, rootMargin: '40% 0px 20% 0px' },
   )
   if (heading) headingIo.observe(heading)
 
@@ -593,7 +594,7 @@ function initMotion() {
         io.unobserve(entry.target)
       })
     },
-    { threshold: 0.18, rootMargin: '0px 0px -8% 0px' },
+    { threshold: 0.08, rootMargin: '15% 0px 10% 0px' },
   )
 
   revealEls.forEach((el) => io.observe(el))

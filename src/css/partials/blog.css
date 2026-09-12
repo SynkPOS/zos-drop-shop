@@ -250,8 +250,17 @@
 
 @media (max-width: 767px) {
   .section.top.blog-section {
-    padding-top: 36px;
+    padding-top: 72px;
     padding-bottom: 80px;
+  }
+
+  .blog-section-contents {
+    gap: 24px;
+  }
+
+  .js-ready .blog-section-heading {
+    opacity: 1;
+    transform: none;
   }
 
   .blog-section-heading {
@@ -305,7 +314,7 @@
 
 @media (max-width: 479px) {
   .section.top.blog-section {
-    padding-top: 36px;
+    padding-top: 72px;
     padding-bottom: 80px;
   }
 

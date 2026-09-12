@@ -237,7 +237,17 @@
 
 @media (max-width: 767px) {
   .section.services-catalog-section {
-    padding: 36px 0;
+    padding-top: 72px;
+    padding-bottom: 0;
+  }
+
+  .services-catalog-contents {
+    gap: 24px;
+  }
+
+  .js-ready .services-catalog-heading[data-reveal] {
+    opacity: 1;
+    transform: none;
   }
 
   .container.services-catalog-container {
@@ -247,10 +257,6 @@
 
   .services-catalog-heading {
     font-size: 40px;
-  }
-
-  .services-catalog-contents {
-    gap: 36px;
   }
 
   .services-catalog-rows {
@@ -292,7 +298,8 @@
 
 @media (max-width: 479px) {
   .section.services-catalog-section {
-    padding: 36px 0;
+    padding-top: 72px;
+    padding-bottom: 0;
   }
 
   .container.services-catalog-container {

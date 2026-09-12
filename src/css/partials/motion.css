@@ -254,6 +254,21 @@ html.reduced-motion .animation-columns-wrapper {
   }
 }
 
+@media (max-width: 767px) {
+  /*
+    Don't slide unrevealed blocks into the next section —
+    that ate the section-to-section gap on mobile.
+  */
+  .js-ready [data-reveal]:not(.is-visible),
+  .js-ready [data-reveal-stagger] > *:not(.is-visible) {
+    transform: none;
+  }
+
+  .js-ready [data-reveal='spin']:not(.is-visible) {
+    transform: none;
+  }
+}
+
 @media (prefers-reduced-motion: reduce) {
   *,
   *::before,

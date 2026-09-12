@@ -224,9 +224,20 @@
 }
 
 @media (max-width: 767px) {
+  /* Section-to-section: 72px from previous content to this section's heading */
   .section.bottom.why-section {
-    padding-top: 36px;
-    padding-bottom: 36px;
+    padding-top: 72px;
+    padding-bottom: 0;
+  }
+
+  .why-contents {
+    gap: 24px;
+  }
+
+  /* Don't leave blank holes — show heading immediately on mobile */
+  .js-ready .why-heading {
+    opacity: 1;
+    transform: none;
   }
 
   .why-row-3 {
@@ -258,8 +269,8 @@
 
 @media (max-width: 479px) {
   .section.bottom.why-section {
-    padding-top: 36px;
-    padding-bottom: 36px;
+    padding-top: 72px;
+    padding-bottom: 0;
   }
 
   .why-heading {
